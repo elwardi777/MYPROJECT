@@ -1,0 +1,243 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 352 83% 57%; /* Morocco red */
+    --primary-foreground: 210 20% 98%;
+    --secondary: 135 55% 45%; /* Morocco green */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 352 83% 97%; /* Light red accent */
+    --accent-foreground: 352 83% 57%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 352 83% 57%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .glass {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20;
+  }
+  
+  .glass-dark {
+    @apply bg-black/20 backdrop-blur-lg border border-white/10;
+  }
+  
+  .transition-all-ease {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  /* Image zoom effect */
+  .img-zoom-container {
+    @apply overflow-hidden relative;
+  }
+  
+  .img-zoom {
+    @apply transition-transform duration-700 ease-in-out;
+  }
+  
+  .img-zoom:hover {
+    @apply scale-110;
+  }
+  
+  /* Gradient text effect */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-primary/80 to-secondary bg-clip-text text-transparent;
+  }
+  
+  /* Hover link effect */
+  .hover-link {
+    @apply relative;
+  }
+  
+  .hover-link::after {
+    @apply content-[''] absolute w-full scale-x-0 h-0.5 -bottom-1 left-0 bg-primary origin-bottom-right transition-transform duration-300;
+  }
+  
+  .hover-link:hover::after {
+    @apply scale-x-100 origin-bottom-left;
+  }
+  
+  /* Staggered list item animations */
+  .stagger-item {
+    @apply opacity-0 translate-y-4 transition-all duration-500;
+  }
+  
+  .stagger-item.appear {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  /* Skeleton loading effect */
+  .skeleton {
+    @apply bg-gray-200 animate-pulse rounded;
+  }
+  
+  /* Custom scrollbar */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary)) transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+}
+
+@layer components {
+  .btn-hover-effect {
+    @apply relative overflow-hidden transition-all duration-300 ease-out;
+  }
+  
+  .btn-hover-effect::after {
+    @apply absolute inset-0 w-full scale-x-0 bg-white/20 transition-transform duration-300 ease-out content-[''];
+    transform-origin: right;
+  }
+  
+  .btn-hover-effect:hover::after {
+    @apply scale-x-100;
+    transform-origin: left;
+  }
+  
+  /* Add Morocco-themed button styles */
+  .btn-morocco {
+    @apply bg-gradient-to-r from-[#c1272d] to-[#e32c33] text-white hover:from-[#b01e24] hover:to-[#d11e25] transition-all;
+  }
+  
+  .btn-morocco-alt {
+    @apply bg-gradient-to-r from-[#006233] to-[#007a40] text-white hover:from-[#00552c] hover:to-[#006636] transition-all;
+  }
+  
+  /* Product card hover effect */
+  .product-card {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+  
+  /* Price tag effect */
+  .price-tag {
+    @apply relative inline-flex items-center justify-center;
+  }
+  
+  .price-tag::before {
+    @apply content-[''] absolute w-full h-full bg-primary/10 rounded-full scale-0 transition-transform duration-300;
+  }
+  
+  .price-tag:hover::before {
+    @apply scale-110;
+  }
+  
+  /* Button shine effect */
+  .btn-shine {
+    @apply relative overflow-hidden;
+  }
+  
+  .btn-shine::after {
+    @apply content-[''] absolute top-0 left-0 h-full w-0 bg-white/20 transform skew(-20deg) transition-all duration-700 ease-out;
+  }
+  
+  .btn-shine:hover::after {
+    @apply w-[150%];
+  }
+  
+  /* Section reveal animation */
+  .reveal-section {
+    @apply opacity-0 translate-y-10 transition-all duration-700 ease-out;
+  }
+  
+  .reveal-section.revealed {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+/* Add animation keyframes */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Animation classes */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+.shine {
+  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shine 3s infinite;
+}
